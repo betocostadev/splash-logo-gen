@@ -1,0 +1,15 @@
+{
+  "name": "splash-logo-gen",
+  "version": "0.8.0",
+  "description": "Splashscreen, logo and icon generator for Desktop, Android, and iOS.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node index"
+  },
+  "author": "Luiz Fonseca and Roberto Costa",
+  "license": "ISC",
+  "dependencies": {
+    "jimp": "^0.6.4",
+    "mkdirp": "^0.5.1"
+  }
+}
