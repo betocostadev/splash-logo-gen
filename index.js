@@ -185,6 +185,20 @@ const iosIcons = [
   },
 ]
 
+const iosSplashData = [
+  {
+    name: 'Default-568h@2x~iphone',
+    backgroundSizeX: 640,
+    backgroundSizeY: 1136,
+    color: setColor,
+    logoSizeX: 640,
+    logoSizeY: 640,
+    blitX: 0,
+    blitY: 248,
+    save: 'dist/ios/splashscreen/Default-568h@2x~iphone.png'
+  },
+]
+
 // Data for logos - dimensions and paths
 const logosData = [
   {
@@ -608,5 +622,6 @@ const startIosIconCreation = arr => {
 
 
 // startLogoCreation(logosData)
+startLogoCreation(iosSplashData)
 // startIconCreation(iconsData)
-startIosIconCreation(iosIcons)
+// startIosIconCreation(iosIcons)
