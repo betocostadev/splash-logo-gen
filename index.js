@@ -208,7 +208,7 @@ const iosSplashData = [
     logoSizeY: 750,
     blitX: 0,
     blitY: 292,
-    save: `dist/ios/splashscreen/Default-667h.png`
+    save: 'dist/ios/splashscreen/Default-667h.png'
   },
   {
     name: 'Default-736h',
@@ -219,7 +219,7 @@ const iosSplashData = [
     logoSizeY: 1024,
     blitX: 109,
     blitY: 592,
-    save: `dist/ios/splashscreen/Default-736h.png`
+    save: 'dist/ios/splashscreen/Default-736h.png'
   },
   {
     name: 'Default-2436h',
@@ -230,7 +230,7 @@ const iosSplashData = [
     logoSizeY: 1056,
     blitX: 35,
     blitY: 690,
-    save: `dist/ios/splashscreen/Default-2436h.png`
+    save: 'dist/ios/splashscreen/Default-2436h.png'
   },
   {
     name: 'Default@2x~iphone',
@@ -241,7 +241,7 @@ const iosSplashData = [
     logoSizeY: 640,
     blitX: 0,
     blitY: 160,
-    save: `dist/ios/splashscreen/Default@2x~iphone.png`
+    save: 'dist/ios/splashscreen/Default@2x~iphone.png'
   },
   {
     name: 'Default~iphone',
@@ -252,7 +252,7 @@ const iosSplashData = [
     logoSizeY: 320,
     blitX: 0,
     blitY: 80,
-    save: `dist/ios/splashscreen/Default~iphone.png`
+    save: 'dist/ios/splashscreen/Default~iphone.png'
   },
   {
     name: 'Default-Landscape-736h',
@@ -263,7 +263,7 @@ const iosSplashData = [
     logoSizeY: 1024,
     blitX: 592,
     blitY: 109,
-    save: `dist/ios/splashscreen/Default-Landscape-736h.png`
+    save: 'dist/ios/splashscreen/Default-Landscape-736h.png'
   },
   {
     name: 'Default-Landscape-2436h',
@@ -274,7 +274,7 @@ const iosSplashData = [
     logoSizeY: 1048,
     blitX: 694,
     blitY: 39,
-    save: `dist/ios/splashscreen/Default-Landscape-2436h.png`
+    save: 'dist/ios/splashscreen/Default-Landscape-2436h.png'
   },
   {
     name: 'Default-Landscape@2x~ipad',
@@ -285,7 +285,7 @@ const iosSplashData = [
     logoSizeY: 1048,
     blitX: 500,
     blitY: 244,
-    save: `dist/ios/splashscreen/Default-Landscape@2x~ipad.png`
+    save: 'dist/ios/splashscreen/Default-Landscape@2x~ipad.png'
   },
   {
     name: 'Default-Landscape~ipad',
@@ -296,7 +296,7 @@ const iosSplashData = [
     logoSizeY: 768,
     blitX: 128,
     blitY: 0,
-    save: `dist/ios/splashscreen/Default-Landscape~ipad.png`
+    save: 'dist/ios/splashscreen/Default-Landscape~ipad.png'
   },
   {
     name: 'Default-Portrait@2x~ipad',
@@ -307,7 +307,7 @@ const iosSplashData = [
     logoSizeY: 1048,
     blitX: 244,
     blitY: 500,
-    save: `dist/ios/splashscreen/Default-Portrait@2x~ipad.png`
+    save: 'dist/ios/splashscreen/Default-Portrait@2x~ipad.png'
   },
   {
     name: 'Default-Portrait~ipad',
@@ -318,7 +318,7 @@ const iosSplashData = [
     logoSizeY: 768,
     blitX: 0,
     blitY: 128,
-    save: `dist/ios/splashscreen/Default-Portrait~ipad.png`
+    save: 'dist/ios/splashscreen/Default-Portrait~ipad.png'
   }
 ]
 
