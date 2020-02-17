@@ -1,4 +1,6 @@
 const fs = require('fs')
+const cliSelect = require('cli-select')
+const chalk = require('chalk');
 const Jimp = require('jimp')
 
 const backgroundImg = "#fff"
@@ -494,9 +496,9 @@ function createBackground(sizeX, sizeY, color){
 
 const startLogoCreation = async function(dataSource) {
   try {
-    console.log(`
+    console.log(chalk.green.bold(`
       Process started. Will generate images...
-      `);
+      `))
 
     dataSource.map(foto => {
       createLogos(foto)
@@ -509,9 +511,9 @@ const startLogoCreation = async function(dataSource) {
 
 const startIconCreation = async function(dataSource) {
   try {
-    console.log(`
+    console.log(chalk.green.bold(`
       Icon creation started. Will generate icons...
-      `)
+      `))
 
     dataSource.map(icon => {
       createIcons(icon)
@@ -576,9 +578,9 @@ async function createIcons({ iconName, backgroundName, sizeX, sizeY, color, xmlP
 
 const startIosIconCreation = arr => {
   if(/^[a-zA-Z0-9-_\.]+\.(jpg|gif|png)$/.test(backgroundImg)) console.log('ITS TRUE')
-  console.log(`
+  console.log(chalk.green.bold(`
       Icon creation for iOS started. Will generate icons...
-      `)
+      `))
   arr.map(foto => {
     // verifico se ele precisa de um background
     if(foto.hasBackground) {
@@ -621,7 +623,78 @@ const startIosIconCreation = arr => {
 }
 
 
+(function welcome () {
+  return console.log(chalk.blue.bold(`
+    Welcome to SplashLogoGen!
+    Please, select the icons and splash screens for the devices you want:
+    `))
+})()
+// CLI Selections
+cliSelect({
+  values: [
+    {
+      message: '1. Generate icons and splash screens for all platforms.'
+    },
+    {
+      message: '2. Generate Android icons and splash screens.'
+    },
+    {
+      message: '3. Generate iOS icons and splash screens'
+    },
+    {
+      message: '4. Exit'
+    }
+  ],
+  valueRenderer: (value, selected) => {
+      if (selected) {
+          return chalk.green(value.message)
+      }
+      return value.message
+  },
+}).then(
+    (value) => {
+      value.id === 0 ?
+      generateAll(logosData, iconsData, iosSplashData, iosIcons)
+      : value.id === 1 ?
+      generateAndroid(logosData, iconsData)
+      : value.id === 2 ?
+      generateIOS(iosSplashData, iosIcons)
+      : console.log(chalk.green.bold('Program closed. No images were generated.'))
+    }).catch((e) => {
+      console.log(chalk.red('Program closed', e))
+  })
+
+
+// CALL FOR GENERATE FUNCTIONS
+const generateAll =  async function() {
+  try {
+    await startLogoCreation(logosData)
+    await startIconCreation(iconsData)
+    await startLogoCreation(iosSplashData)
+    await startIosIconCreation(iosIcons)
+  } catch (err) {
+    return console.error(err)
+  }
+}
+
+const generateAndroid = async function() {
+  try {
+    await startLogoCreation(logosData)
+    await startIconCreation(iconsData)
+  } catch (err) {
+    return console.error(err)
+  }
+}
+
+const generateIOS = async function() {
+  try {
+    await startLogoCreation(iosSplashData)
+    await startIosIconCreation(iosIcons)
+  } catch (err) {
+    return console.error(err)
+  }
+}
 // startLogoCreation(logosData)
-startLogoCreation(iosSplashData)
+// startLogoCreation(iosSplashData)
 // startIconCreation(iconsData)
 // startIosIconCreation(iosIcons)

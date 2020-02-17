@@ -9,6 +9,8 @@
   "author": "Luiz Fonseca and Roberto Costa",
   "license": "ISC",
   "dependencies": {
+    "chalk": "^3.0.0",
+    "cli-select": "^1.1.1",
     "jimp": "^0.6.4",
     "mkdirp": "^0.5.1"
   }
