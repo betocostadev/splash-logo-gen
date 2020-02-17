@@ -657,7 +657,6 @@ async function createLogos({ name, backgroundSizeX, backgroundSizeY,	color,	logo
     // write image
 		.write(save)
 		console.log(`Image: ${name} created!`)
-    // console.log('Image Processing Completed')
   } catch (error) {
     console.error(error)
   }
@@ -681,7 +680,6 @@ async function createIcons({ iconName, backgroundName, sizeX, sizeY, color, xmlP
 </adaptive-icon>`.trim()
 
         fs.writeFile(xmlPath, data, 'utf8', (err) => {
-          // data = JSON.stringify(data)
           if (err) throw err
           console.log(`XML file ${xmlPath} created!`)
         })
@@ -707,10 +705,9 @@ const startIosIconCreation = arr => {
     if(foto.hasBackground) {
       // verificar se ele tem uma img de background padrao
       if(/^[a-zA-Z0-9-_\.]+\.(jpg|gif|png)$/.test(foto.backgroundImg)) {
-        // Arruma o tamanho do backgraund
+        // Arruma o tamanho do background
         Jimp.read(foto.backgroundImg)
         .then(img1 => {
-          // img1.invert()
           img1.resize(foto.backgroundImgX, foto.backgroundImg) // resize
           Jimp.read(foto.imgMode)
           .then(img2 => {
@@ -815,7 +812,3 @@ const generateIOS = async function() {
     return console.error(err)
   }
 }
-// startLogoCreation(logosData)
-// startLogoCreation(iosSplashData)
-// startIconCreation(iconsData)
-// startIosIconCreation(iosIcons)
