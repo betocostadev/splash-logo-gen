@@ -14,6 +14,7 @@ const colors = [
 const setColor = colors[0].code
 
 // ARRAYS WITH ICONS AND LOGOS DATA FOR ALL PLATFORMS:
+// Data for iOS icons
 const iosIcons = [
 	{
 		tamanhoLogoY: 57,
@@ -24,6 +25,16 @@ const iosIcons = [
 		backgroundImgY: 57,
 		backgroundImgX: 57,
 		pathSave: 'dist/ios/icons/icon.png'
+	},
+	{
+		tamanhoLogoY: 20,
+		tamanhoLogoX: 20,
+		imgMode: iosLogo,
+		hasBackground: false,
+		backgroundImg: backgroundImg,
+		backgroundImgY: 20,
+		backgroundImgX: 20,
+		pathSave: 'dist/ios/icons/icon-20.png'
 	},
 	{
     tamanhoLogoY: 114,
@@ -66,13 +77,13 @@ const iosIcons = [
     pathSave: 'dist/ios/icons/icon-24@2x.png'
   },
 	{
-    tamanhoLogoY: 48,
-    tamanhoLogoX: 48,
+    tamanhoLogoY: 55,
+    tamanhoLogoX: 55,
     imgMode: iosLogo,
     hasBackground: true,
     backgroundImg:backgroundImg,
-    backgroundImgY:48,
-    backgroundImgX:48,
+    backgroundImgY: 55,
+    backgroundImgX: 55,
     pathSave: 'dist/ios/icons/icon-27.5@2x.png'
   },
 	{
@@ -94,6 +105,26 @@ const iosIcons = [
     backgroundImgY: 29,
     backgroundImgX: 29,
     pathSave: 'dist/ios/icons/icon-29.png'
+  },
+  {
+		tamanhoLogoY: 40,
+		tamanhoLogoX: 40,
+		imgMode: iosLogo,
+		hasBackground: false,
+		backgroundImg: backgroundImg,
+		backgroundImgY: 40,
+		backgroundImgX: 40,
+		pathSave: 'dist/ios/icons/icon-40.png'
+	},
+	{
+    tamanhoLogoY: 80,
+    tamanhoLogoX: 80,
+    imgMode: iosLogo,
+    hasBackground: true,
+    backgroundImg:backgroundImg,
+    backgroundImgY:80,
+    backgroundImgX:80,
+    pathSave: 'dist/ios/icons/icon-40@2x.png'
   },
 	{
     tamanhoLogoY: 58,
@@ -126,6 +157,46 @@ const iosIcons = [
     pathSave: 'dist/ios/icons/icon-44@2x.png'
   },
 	{
+    tamanhoLogoY: 50,
+    tamanhoLogoX: 50,
+    imgMode: iosLogo,
+    hasBackground: false,
+    backgroundImg:backgroundImg,
+    backgroundImgY: 50,
+    backgroundImgX: 50,
+    pathSave: 'dist/ios/icons/icon-50.png'
+  },
+	{
+    tamanhoLogoY: 100,
+    tamanhoLogoX: 100,
+    imgMode: iosLogo,
+    hasBackground: false,
+    backgroundImg:backgroundImg,
+    backgroundImgY: 100,
+    backgroundImgX: 100,
+    pathSave: 'dist/ios/icons/icon-50@2x.png'
+  },
+	{
+    tamanhoLogoY: 120,
+    tamanhoLogoX: 120,
+    imgMode: iosLogo,
+    hasBackground: false,
+    backgroundImg:backgroundImg,
+    backgroundImgY: 120,
+    backgroundImgX: 120,
+    pathSave: 'dist/ios/icons/icon-60@2x.png'
+  },
+	{
+    tamanhoLogoY: 180,
+    tamanhoLogoX: 180,
+    imgMode: iosLogo,
+    hasBackground: false,
+    backgroundImg:backgroundImg,
+    backgroundImgY: 180,
+    backgroundImgX: 180,
+    pathSave: 'dist/ios/icons/icon-60@3x.png'
+  },
+	{
     tamanhoLogoY: 72,
     tamanhoLogoX: 72,
     imgMode: iosLogo,
@@ -154,6 +225,36 @@ const iosIcons = [
     backgroundImgY:76,
     backgroundImgX:76,
     pathSave: 'dist/ios/icons/icon-76.png'
+  },
+	{
+    tamanhoLogoY: 152,
+    tamanhoLogoX: 152,
+    imgMode: iosLogo,
+    hasBackground: false,
+    backgroundImg:backgroundImg,
+    backgroundImgY: 152,
+    backgroundImgX: 152,
+    pathSave: 'dist/ios/icons/icon-76@2x.png'
+  },
+	{
+    tamanhoLogoY: 167,
+    tamanhoLogoX: 167,
+    imgMode: iosLogo,
+    hasBackground: false,
+    backgroundImg:backgroundImg,
+    backgroundImgY: 167,
+    backgroundImgX: 167,
+    pathSave: 'dist/ios/icons/icon-83.5@2x.png'
+  },
+	{
+    tamanhoLogoY: 167,
+    tamanhoLogoX: 167,
+    imgMode: iosLogo,
+    hasBackground: false,
+    backgroundImg:backgroundImg,
+    backgroundImgY: 167,
+    backgroundImgX: 167,
+    pathSave: 'dist/ios/icons/icon-83.png'
   },
 	{
     tamanhoLogoY: 172,
@@ -185,8 +286,39 @@ const iosIcons = [
     backgroundImgX:1024,
     pathSave: 'dist/ios/icons/icon-1024.png'
   },
+	{
+    tamanhoLogoY: 29,
+    tamanhoLogoX: 29,
+    imgMode: iosLogo,
+    hasBackground: false,
+    backgroundImg:backgroundImg,
+    backgroundImgY: 29,
+    backgroundImgX: 29,
+    pathSave: 'dist/ios/icons/icon-small.png'
+  },
+	{
+    tamanhoLogoY: 58,
+    tamanhoLogoX: 58,
+    imgMode: iosLogo,
+    hasBackground: false,
+    backgroundImg:backgroundImg,
+    backgroundImgY: 58,
+    backgroundImgX: 58,
+    pathSave: 'dist/ios/icons/icon-small@2x.png'
+  },
+	{
+    tamanhoLogoY: 87,
+    tamanhoLogoX: 87,
+    imgMode: iosLogo,
+    hasBackground: false,
+    backgroundImg:backgroundImg,
+    backgroundImgY: 87,
+    backgroundImgX: 87,
+    pathSave: 'dist/ios/icons/icon-small@3x.png'
+  },
 ]
 
+// Data for iOS Splash screens
 const iosSplashData = [
   {
     name: 'Default-568h@2x~iphone',
@@ -617,9 +749,7 @@ function createBackground(sizeX, sizeY, color){
 
 const startLogoCreation = async function(dataSource) {
   try {
-    console.log(chalk.green.bold(`
-      Process started. Will generate images...
-      `))
+    console.log(chalk.green.bold('Process started. Will generate images...'))
 
     dataSource.map(foto => {
       createLogos(foto)
@@ -632,13 +762,12 @@ const startLogoCreation = async function(dataSource) {
 
 const startIconCreation = async function(dataSource) {
   try {
-    console.log(chalk.green.bold(`
-      Icon creation started. Will generate icons...
-      `))
+    console.log(chalk.green.bold('Icon creation started. Will generate icons...'))
 
     dataSource.map(icon => {
       createIcons(icon)
     })
+
   } catch (error) {
     console.error(error)
   }
@@ -656,7 +785,7 @@ async function createLogos({ name, backgroundSizeX, backgroundSizeY,	color,	logo
     background.blit(logoResized, blitX, blitY)
     // write image
 		.write(save)
-		console.log(`Image: ${name} created!`)
+		console.log(`Image: ${name} created.`)
   } catch (error) {
     console.error(error)
   }
@@ -671,7 +800,7 @@ async function createIcons({ iconName, backgroundName, sizeX, sizeY, color, xmlP
       color = colors[0].code
       const background = await createBackground(sizeX, sizeY,	color)
       await background.write(saveBackground)
-      console.log(`Icon background ${backgroundName} created!`)
+      console.log(`Icon background ${backgroundName} created.`)
       if (xmlPath) {
         const data = `<?xml version="1.0" encoding="utf-8"?>
 <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
@@ -688,7 +817,7 @@ async function createIcons({ iconName, backgroundName, sizeX, sizeY, color, xmlP
 
     const iconResized = await icon.resize(sizeX, sizeY)
     await iconResized.write(saveIcon)
-    console.log(`Icon foreground ${iconName} created!`)
+    console.log(`Icon foreground ${iconName} created.`)
 
   } catch (error) {
     console.error(error)
@@ -697,9 +826,7 @@ async function createIcons({ iconName, backgroundName, sizeX, sizeY, color, xmlP
 
 const startIosIconCreation = arr => {
   if(/^[a-zA-Z0-9-_\.]+\.(jpg|gif|png)$/.test(backgroundImg)) console.log('ITS TRUE')
-  console.log(chalk.green.bold(`
-      Icon creation for iOS started. Will generate icons...
-      `))
+  console.log(chalk.green.bold('Icon creation for iOS started. Will generate icons...'))
   arr.map(foto => {
     // verifico se ele precisa de um background
     if(foto.hasBackground) {
@@ -713,7 +840,7 @@ const startIosIconCreation = arr => {
           .then(img2 => {
             img2.resize(foto.tamanhoLogoY, foto.tamanhoLogoX)
             img1.composite(img2,0,0)
-            .write(foto.pathSave, e => {console.log('foi')})
+            .write(foto.pathSave)
           })
           .catch(erro => console.log(erro))
         .catch(erro => console.log(erro))
@@ -728,10 +855,10 @@ const startIosIconCreation = arr => {
             .write(foto.pathSave)
           })
         })
-        console.log(`Created ${foto.pathSave} icon!`)
+        console.log(`Icon: ${foto.pathSave} created.`)
       }
     } else {
-      Jimp.resize(imgMode)
+      Jimp.read(foto.imgMode)
       .then(img => {
         img.resize(foto.tamanhoLogoX, foto.tamanhoLogoY)
         .write(foto.pathSave)
