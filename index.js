@@ -1,320 +1,290 @@
 const fs = require('fs')
-const cliSelect = require('cli-select')
-const chalk = require('chalk');
+const chalk = require('chalk')
 const Jimp = require('jimp')
+const inquirer = require('inquirer')
 
-const backgroundImg = "#fff"
-const iosLogo = 'logo.png'
-const logoSource = 'logo.png'
-const iconSource = 'icon.png'
-const colors = [
-  { name: 'white', code: '#ffffff' },
-  { name: 'transparent', code: '#ffffff00' }
-]
-const setColor = colors[0].code
+const platforms = [ '1. All', '2. Android', '3. iOS' ]
+const colors = [ 'White (#ffffff)', 'Black (#000000)', 'Transparent (#ffffff00)', 'Custom' ]
+const userAnswers = []
+let iosLogo, logoSource, iconSource, setColor
+
+// Welcome message
+console.log(chalk.blue.bold(`
+    Welcome to SplashLogoGen!
+    `))
 
 // ARRAYS WITH ICONS AND LOGOS DATA FOR ALL PLATFORMS:
 // Data for iOS icons
 const iosIcons = [
 	{
-		tamanhoLogoY: 57,
-		tamanhoLogoX: 57,
-		imgMode: iosLogo,
 		hasBackground: true,
-		backgroundImg: backgroundImg,
-		backgroundImgY: 57,
-		backgroundImgX: 57,
-		pathSave: 'dist/ios/icons/icon.png'
+		iconSizeX: 57,
+		iconSizeY: 57,
+		backgroundImg: setColor,
+		backgroundSizeX: 57,
+		backgroundSizeY: 57,
+		savePath: 'dist/ios/icons/icon.png'
 	},
 	{
-		tamanhoLogoY: 20,
-		tamanhoLogoX: 20,
-		imgMode: iosLogo,
 		hasBackground: false,
-		backgroundImg: backgroundImg,
-		backgroundImgY: 20,
-		backgroundImgX: 20,
-		pathSave: 'dist/ios/icons/icon-20.png'
+		iconSizeX: 20,
+		iconSizeY: 20,
+		backgroundImg: setColor,
+		backgroundSizeX: 20,
+		backgroundSizeY: 20,
+		savePath: 'dist/ios/icons/icon-20.png'
 	},
 	{
-    tamanhoLogoY: 114,
-    tamanhoLogoX: 114,
-    imgMode: iosLogo,
     hasBackground: true,
-    backgroundImg: backgroundImg,
-    backgroundImgY: 114,
-    backgroundImgX: 114,
-    pathSave: 'dist/ios/icons/icon@2x.png'
+    iconSizeX: 114,
+    iconSizeY: 114,
+    backgroundImg: setColor,
+    backgroundSizeX: 114,
+    backgroundSizeY: 114,
+    savePath: 'dist/ios/icons/icon@2x.png'
   },
 	{
-    tamanhoLogoY: 40,
-    tamanhoLogoX: 40,
-    imgMode: iosLogo,
     hasBackground: true,
-    backgroundImg: backgroundImg,
-    backgroundImgY: 40,
-    backgroundImgX: 40,
-    pathSave: 'dist/ios/icons/icon-20@2x.png'
+    iconSizeX: 40,
+    iconSizeY: 40,
+    backgroundImg: setColor,
+    backgroundSizeX: 40,
+    backgroundSizeY: 40,
+    savePath: 'dist/ios/icons/icon-20@2x.png'
   },
   {
-    tamanhoLogoY: 60,
-    tamanhoLogoX: 60,
-    imgMode: iosLogo,
     hasBackground: true,
-    backgroundImg: backgroundImg,
-    backgroundImgY: 60,
-    backgroundImgX: 60,
-    pathSave: 'dist/ios/icons/icon-20@3x.png'
+    iconSizeX: 60,
+    iconSizeY: 60,
+    backgroundImg: setColor,
+    backgroundSizeX: 60,
+    backgroundSizeY: 60,
+    savePath: 'dist/ios/icons/icon-20@3x.png'
   },
   {
-    tamanhoLogoY: 48,
-    tamanhoLogoX: 48,
-    imgMode: iosLogo,
     hasBackground: true,
-    backgroundImg:backgroundImg,
-    backgroundImgY:48,
-    backgroundImgX:48,
-    pathSave: 'dist/ios/icons/icon-24@2x.png'
+    iconSizeX: 48,
+    iconSizeY: 48,
+    backgroundImg: setColor,
+    backgroundSizeX:48,
+    backgroundSizeY:48,
+    savePath: 'dist/ios/icons/icon-24@2x.png'
   },
 	{
-    tamanhoLogoY: 55,
-    tamanhoLogoX: 55,
-    imgMode: iosLogo,
     hasBackground: true,
-    backgroundImg:backgroundImg,
-    backgroundImgY: 55,
-    backgroundImgX: 55,
-    pathSave: 'dist/ios/icons/icon-27.5@2x.png'
+    iconSizeX: 55,
+    iconSizeY: 55,
+    backgroundImg: setColor,
+    backgroundSizeX: 55,
+    backgroundSizeY: 55,
+    savePath: 'dist/ios/icons/icon-27.5@2x.png'
   },
 	{
-    tamanhoLogoY: 55,
-    tamanhoLogoX: 55,
-    imgMode: iosLogo,
     hasBackground: true,
-    backgroundImg: backgroundImg,
-    backgroundImgY: 55,
-    backgroundImgX: 55,
-    pathSave: 'dist/ios/icons/icon-27.png'
+    iconSizeX: 55,
+    iconSizeY: 55,
+    backgroundImg: setColor,
+    backgroundSizeX: 55,
+    backgroundSizeY: 55,
+    savePath: 'dist/ios/icons/icon-27.png'
   },
 	{
-    tamanhoLogoY: 29,
-    tamanhoLogoX: 29,
-    imgMode: iosLogo,
     hasBackground: true,
-    backgroundImg: backgroundImg,
-    backgroundImgY: 29,
-    backgroundImgX: 29,
-    pathSave: 'dist/ios/icons/icon-29.png'
+    iconSizeX: 29,
+    iconSizeY: 29,
+    backgroundImg: setColor,
+    backgroundSizeX: 29,
+    backgroundSizeY: 29,
+    savePath: 'dist/ios/icons/icon-29.png'
   },
   {
-		tamanhoLogoY: 40,
-		tamanhoLogoX: 40,
-		imgMode: iosLogo,
 		hasBackground: false,
-		backgroundImg: backgroundImg,
-		backgroundImgY: 40,
-		backgroundImgX: 40,
-		pathSave: 'dist/ios/icons/icon-40.png'
+		iconSizeX: 40,
+		iconSizeY: 40,
+		backgroundImg: setColor,
+		backgroundSizeX: 40,
+		backgroundSizeY: 40,
+		savePath: 'dist/ios/icons/icon-40.png'
 	},
 	{
-    tamanhoLogoY: 80,
-    tamanhoLogoX: 80,
-    imgMode: iosLogo,
     hasBackground: true,
-    backgroundImg:backgroundImg,
-    backgroundImgY:80,
-    backgroundImgX:80,
-    pathSave: 'dist/ios/icons/icon-40@2x.png'
+    iconSizeX: 80,
+    iconSizeY: 80,
+    backgroundImg: setColor,
+    backgroundSizeX:80,
+    backgroundSizeY:80,
+    savePath: 'dist/ios/icons/icon-40@2x.png'
   },
 	{
-    tamanhoLogoY: 58,
-    tamanhoLogoX: 58,
-    imgMode: iosLogo,
     hasBackground: true,
-    backgroundImg:backgroundImg,
-    backgroundImgY:58,
-    backgroundImgX:58,
-    pathSave: 'dist/ios/icons/icon-29@2x.png'
+    iconSizeX: 58,
+    iconSizeY: 58,
+    backgroundImg: setColor,
+    backgroundSizeX:58,
+    backgroundSizeY:58,
+    savePath: 'dist/ios/icons/icon-29@2x.png'
   },
 	{
-    tamanhoLogoY: 87,
-    tamanhoLogoX: 87,
-    imgMode: iosLogo,
     hasBackground: true,
-    backgroundImg: backgroundImg,
-    backgroundImgY: 87,
-    backgroundImgX: 87,
-    pathSave: 'dist/ios/icons/icon-29@3x.png'
+    iconSizeX: 87,
+    iconSizeY: 87,
+    backgroundImg: setColor,
+    backgroundSizeX: 87,
+    backgroundSizeY: 87,
+    savePath: 'dist/ios/icons/icon-29@3x.png'
   },
 	{
-    tamanhoLogoY: 88,
-    tamanhoLogoX: 88,
-    imgMode: iosLogo,
     hasBackground: true,
-    backgroundImg:backgroundImg,
-    backgroundImgY:88,
-    backgroundImgX:88,
-    pathSave: 'dist/ios/icons/icon-44@2x.png'
+    iconSizeX: 88,
+    iconSizeY: 88,
+    backgroundImg: setColor,
+    backgroundSizeX:88,
+    backgroundSizeY:88,
+    savePath: 'dist/ios/icons/icon-44@2x.png'
   },
 	{
-    tamanhoLogoY: 50,
-    tamanhoLogoX: 50,
-    imgMode: iosLogo,
     hasBackground: false,
-    backgroundImg:backgroundImg,
-    backgroundImgY: 50,
-    backgroundImgX: 50,
-    pathSave: 'dist/ios/icons/icon-50.png'
+    iconSizeX: 50,
+    iconSizeY: 50,
+    backgroundImg: setColor,
+    backgroundSizeX: 50,
+    backgroundSizeY: 50,
+    savePath: 'dist/ios/icons/icon-50.png'
   },
 	{
-    tamanhoLogoY: 100,
-    tamanhoLogoX: 100,
-    imgMode: iosLogo,
     hasBackground: false,
-    backgroundImg:backgroundImg,
-    backgroundImgY: 100,
-    backgroundImgX: 100,
-    pathSave: 'dist/ios/icons/icon-50@2x.png'
+    iconSizeX: 100,
+    iconSizeY: 100,
+    backgroundImg: setColor,
+    backgroundSizeX: 100,
+    backgroundSizeY: 100,
+    savePath: 'dist/ios/icons/icon-50@2x.png'
   },
 	{
-    tamanhoLogoY: 120,
-    tamanhoLogoX: 120,
-    imgMode: iosLogo,
     hasBackground: false,
-    backgroundImg:backgroundImg,
-    backgroundImgY: 120,
-    backgroundImgX: 120,
-    pathSave: 'dist/ios/icons/icon-60@2x.png'
+    iconSizeX: 120,
+    iconSizeY: 120,
+    backgroundImg: setColor,
+    backgroundSizeX: 120,
+    backgroundSizeY: 120,
+    savePath: 'dist/ios/icons/icon-60@2x.png'
   },
 	{
-    tamanhoLogoY: 180,
-    tamanhoLogoX: 180,
-    imgMode: iosLogo,
     hasBackground: false,
-    backgroundImg:backgroundImg,
-    backgroundImgY: 180,
-    backgroundImgX: 180,
-    pathSave: 'dist/ios/icons/icon-60@3x.png'
+    iconSizeX: 180,
+    iconSizeY: 180,
+    backgroundImg: setColor,
+    backgroundSizeX: 180,
+    backgroundSizeY: 180,
+    savePath: 'dist/ios/icons/icon-60@3x.png'
   },
 	{
-    tamanhoLogoY: 72,
-    tamanhoLogoX: 72,
-    imgMode: iosLogo,
     hasBackground: true,
-    backgroundImg:backgroundImg,
-    backgroundImgY:72,
-    backgroundImgX:72,
-    pathSave: 'dist/ios/icons/icon-72.png'
+    iconSizeX: 72,
+    iconSizeY: 72,
+    backgroundImg: setColor,
+    backgroundSizeX:72,
+    backgroundSizeY:72,
+    savePath: 'dist/ios/icons/icon-72.png'
   },
 	{
-    tamanhoLogoY: 144,
-    tamanhoLogoX: 144,
-    imgMode: iosLogo,
     hasBackground: true,
-    backgroundImg:backgroundImg,
-    backgroundImgY:144,
-    backgroundImgX:144,
-    pathSave: 'dist/ios/icons/icon-72@2x.png'
+    iconSizeX: 144,
+    iconSizeY: 144,
+    backgroundImg: setColor,
+    backgroundSizeX:144,
+    backgroundSizeY:144,
+    savePath: 'dist/ios/icons/icon-72@2x.png'
   },
 	{
-    tamanhoLogoY: 76,
-    tamanhoLogoX: 76,
-    imgMode: iosLogo,
     hasBackground: true,
-    backgroundImg:backgroundImg,
-    backgroundImgY:76,
-    backgroundImgX:76,
-    pathSave: 'dist/ios/icons/icon-76.png'
+    iconSizeX: 76,
+    iconSizeY: 76,
+    backgroundImg: setColor,
+    backgroundSizeX:76,
+    backgroundSizeY:76,
+    savePath: 'dist/ios/icons/icon-76.png'
   },
 	{
-    tamanhoLogoY: 152,
-    tamanhoLogoX: 152,
-    imgMode: iosLogo,
     hasBackground: false,
-    backgroundImg:backgroundImg,
-    backgroundImgY: 152,
-    backgroundImgX: 152,
-    pathSave: 'dist/ios/icons/icon-76@2x.png'
+    iconSizeX: 152,
+    iconSizeY: 152,
+    backgroundImg: setColor,
+    backgroundSizeX: 152,
+    backgroundSizeY: 152,
+    savePath: 'dist/ios/icons/icon-76@2x.png'
   },
 	{
-    tamanhoLogoY: 167,
-    tamanhoLogoX: 167,
-    imgMode: iosLogo,
     hasBackground: false,
-    backgroundImg:backgroundImg,
-    backgroundImgY: 167,
-    backgroundImgX: 167,
-    pathSave: 'dist/ios/icons/icon-83.5@2x.png'
+    iconSizeX: 167,
+    iconSizeY: 167,
+    backgroundImg: setColor,
+    backgroundSizeX: 167,
+    backgroundSizeY: 167,
+    savePath: 'dist/ios/icons/icon-83.5@2x.png'
   },
 	{
-    tamanhoLogoY: 167,
-    tamanhoLogoX: 167,
-    imgMode: iosLogo,
     hasBackground: false,
-    backgroundImg:backgroundImg,
-    backgroundImgY: 167,
-    backgroundImgX: 167,
-    pathSave: 'dist/ios/icons/icon-83.png'
+    iconSizeX: 167,
+    iconSizeY: 167,
+    backgroundImg: setColor,
+    backgroundSizeX: 167,
+    backgroundSizeY: 167,
+    savePath: 'dist/ios/icons/icon-83.png'
   },
 	{
-    tamanhoLogoY: 172,
-    tamanhoLogoX: 172,
-    imgMode: iosLogo,
     hasBackground: true,
-    backgroundImg:backgroundImg,
-    backgroundImgY:172,
-    backgroundImgX:172,
-    pathSave: 'dist/ios/icons/icon-86@2x.png'
+    iconSizeX: 172,
+    iconSizeY: 172,
+    backgroundImg: setColor,
+    backgroundSizeX:172,
+    backgroundSizeY:172,
+    savePath: 'dist/ios/icons/icon-86@2x.png'
   },
 	{
-    tamanhoLogoY: 196,
-    tamanhoLogoX: 196,
-    imgMode: iosLogo,
     hasBackground: true,
-    backgroundImg:backgroundImg,
-    backgroundImgY:196,
-    backgroundImgX:196,
-    pathSave: 'dist/ios/icons/icon-98@2x.png'
+    iconSizeX: 196,
+    iconSizeY: 196,
+    backgroundImg: setColor,
+    backgroundSizeX:196,
+    backgroundSizeY:196,
+    savePath: 'dist/ios/icons/icon-98@2x.png'
   },
 	{
-    tamanhoLogoY: 1024,
-    tamanhoLogoX: 1024,
-    imgMode: iosLogo,
     hasBackground: true,
-    backgroundImg:backgroundImg,
-    backgroundImgY:1024,
-    backgroundImgX:1024,
-    pathSave: 'dist/ios/icons/icon-1024.png'
+    iconSizeX: 1024,
+    iconSizeY: 1024,
+    backgroundImg: setColor,
+    backgroundSizeX:1024,
+    backgroundSizeY:1024,
+    savePath: 'dist/ios/icons/icon-1024.png'
   },
 	{
-    tamanhoLogoY: 29,
-    tamanhoLogoX: 29,
-    imgMode: iosLogo,
     hasBackground: false,
-    backgroundImg:backgroundImg,
-    backgroundImgY: 29,
-    backgroundImgX: 29,
-    pathSave: 'dist/ios/icons/icon-small.png'
+    iconSizeX: 29,
+    iconSizeY: 29,
+    backgroundImg: setColor,
+    backgroundSizeX: 29,
+    backgroundSizeY: 29,
+    savePath: 'dist/ios/icons/icon-small.png'
   },
 	{
-    tamanhoLogoY: 58,
-    tamanhoLogoX: 58,
-    imgMode: iosLogo,
     hasBackground: false,
-    backgroundImg:backgroundImg,
-    backgroundImgY: 58,
-    backgroundImgX: 58,
-    pathSave: 'dist/ios/icons/icon-small@2x.png'
+    iconSizeX: 58,
+    iconSizeY: 58,
+    backgroundImg: setColor,
+    backgroundSizeX: 58,
+    backgroundSizeY: 58,
+    savePath: 'dist/ios/icons/icon-small@2x.png'
   },
 	{
-    tamanhoLogoY: 87,
-    tamanhoLogoX: 87,
-    imgMode: iosLogo,
     hasBackground: false,
-    backgroundImg:backgroundImg,
-    backgroundImgY: 87,
-    backgroundImgX: 87,
-    pathSave: 'dist/ios/icons/icon-small@3x.png'
+    iconSizeX: 87,
+    iconSizeY: 87,
+    backgroundImg: setColor,
+    backgroundSizeX: 87,
+    backgroundSizeY: 87,
+    savePath: 'dist/ios/icons/icon-small@3x.png'
   },
 ]
 
@@ -736,12 +706,10 @@ const iconsData = [
   },
 ]
 
-
-
-function createBackground(sizeX, sizeY, color){
+function createBackground(sizeX, sizeY, color) {
   return new Promise((resolve, reject) => {
       new Jimp(sizeX, sizeY, color,  (err, image) => {
-          if(err)  return reject(err)
+          if(err) return reject(err)
           return resolve(image)
       })
   })
@@ -773,31 +741,70 @@ const startIconCreation = async function(dataSource) {
   }
 }
 
-// Create logos
-async function createLogos({ name, backgroundSizeX, backgroundSizeY,	color,	logoSizeX, logoSizeY,	blitX,	blitY, save}) {
-  const logo = await Jimp.read(logoSource)
+const startIosIconCreation = async function(dataSource) {
   try {
-    const background = await createBackground(backgroundSizeX, backgroundSizeY,	color)
-    // call to blit function
-    // const backgroundResized = await background.resize(1024, 500)
-    const logoResized = await logo.resize(logoSizeX, logoSizeY)
-    // background.resize(1024, 500)
-    background.blit(logoResized, blitX, blitY)
-    // write image
-		.write(save)
-		console.log(`Image: ${name} created.`)
+    console.log(chalk.green.bold('iOS icon creation started. Will generate icons...'))
+
+    dataSource.map(icon => {
+      createIosIcons(icon)
+    })
+
   } catch (error) {
     console.error(error)
   }
 }
 
+// Create logos
+async function createLogos({ name, backgroundSizeX, backgroundSizeY,	color,	logoSizeX, logoSizeY,	blitX,	blitY, save}) {
+  color = setColor
+  const logo = await Jimp.read(logoSource)
+
+  try {
+    const background = await createBackground(backgroundSizeX, backgroundSizeY,	color)
+    // call to blit function - Blit is used to change the position of the logo in relation to the background
+    const logoResized = await logo.resize(logoSizeX, logoSizeY)
+    background.blit(logoResized, blitX, blitY)
+    // write image
+		.write(save)
+    console.log(`Image: ${name} created.`)
+
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+async function createIosIcons({ hasBackground, backgroundSizeX, backgroundSizeY, color, iconSizeX, iconSizeY, savePath  }) {
+  color = setColor
+  const icon = await Jimp.read(iconSource)
+
+  try {
+    if (hasBackground) {
+      const background = await createBackground(backgroundSizeX, backgroundSizeY,	color)
+    // call to blit function - Blit is used to change the position of the logo in relation to the background
+      const iconResized = await icon.resize(iconSizeX, iconSizeY)
+      background.composite(iconResized, 0, 0)
+      // write image
+      .write(savePath)
+      console.log(`iOS icon: ${savePath} created.`)
+    } else {
+      const iconResized = await icon.resize(iconSizeX, iconSizeY)
+      iconResized.write(savePath)
+      console.log(`iOS icon: ${savePath} created.`)
+    }
+
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+
 async function createIcons({ iconName, backgroundName, sizeX, sizeY, color, xmlPath, saveIcon, saveBackground}) {
+  color = setColor
   const icon = await Jimp.read(iconSource)
 
   try {
     // Check if it needs a background
     if (backgroundName) {
-      color = colors[0].code
       const background = await createBackground(sizeX, sizeY,	color)
       await background.write(saveBackground)
       console.log(`Icon background ${backgroundName} created.`)
@@ -824,91 +831,120 @@ async function createIcons({ iconName, backgroundName, sizeX, sizeY, color, xmlP
   }
 }
 
-const startIosIconCreation = arr => {
-  if(/^[a-zA-Z0-9-_\.]+\.(jpg|gif|png)$/.test(backgroundImg)) console.log('ITS TRUE')
-  console.log(chalk.green.bold('Icon creation for iOS started. Will generate icons...'))
-  arr.map(foto => {
-    // verifico se ele precisa de um background
-    if(foto.hasBackground) {
-      // verificar se ele tem uma img de background padrao
-      if(/^[a-zA-Z0-9-_\.]+\.(jpg|gif|png)$/.test(foto.backgroundImg)) {
-        // Arruma o tamanho do background
-        Jimp.read(foto.backgroundImg)
-        .then(img1 => {
-          img1.resize(foto.backgroundImgX, foto.backgroundImg) // resize
-          Jimp.read(foto.imgMode)
-          .then(img2 => {
-            img2.resize(foto.tamanhoLogoY, foto.tamanhoLogoX)
-            img1.composite(img2,0,0)
-            .write(foto.pathSave)
-          })
-          .catch(erro => console.log(erro))
-        .catch(erro => console.log(erro))
-        })
-      } else {
-        // crio uma imagem de background com a cor passada como parâmetro
-        new Jimp(foto.backgroundImgY, foto.backgroundImgX, foto.backgroundImg,  (err, image) => {
-          Jimp.read(foto.imgMode)
-          .then(img => {
-            img.resize(foto.tamanhoLogoY, foto.tamanhoLogoX)
-            image.composite(img, 0,0)
-            .write(foto.pathSave)
-          })
-        })
-        console.log(`Icon: ${foto.pathSave} created.`)
+const askForImages = (() => {
+  inquirer.prompt([
+      {
+        type: 'list',
+        name: 'PLATFORM',
+        message: 'For which platforms do you want to generate the Icons and Splash Screens ?',
+        choices: platforms
+      },
+  ]).then(answers => {
+    userAnswers.push(answers.PLATFORM)
+    askIfSameFile()
+  }).catch(err => err)
+})
+
+const askIfSameFile = (() => {
+  inquirer.prompt([
+    {
+      type: 'confirm',
+      name: 'SAME_FILE',
+      message: 'Will you use the SAME FILE for the Icons and Splash Screens ?',
+      default: true
+    }
+  ]).then(answer => {
+    userAnswers.push(answer.SAME_FILE)
+    askForFileName()
+  }).catch(err => console.log(err))
+})
+
+const askForFileName = (() => {
+  if(userAnswers[1] === false) {
+    inquirer.prompt([
+      {
+        type: 'input',
+        name: 'LOGO_IMAGE',
+        message: 'Please provide the filename of the logo for the Splash Screen (recommended size 1024 x 1024 or bigger | PNG format). E.g.: logo',
+        default: 'logo'
+      },
+      {
+        type: 'input',
+        name: 'ICON_IMAGE',
+        message: 'Please provide the filename of the icon for the icons (recommended size 256 x 256 or bigger | PNG format). E.g.: icon',
+        default: 'icon'
       }
+    ]).then(answer => {
+      userAnswers.push(answer.LOGO_IMAGE + '.png')
+      userAnswers.push(answer.ICON_IMAGE + '.png')
+      askForColor()
+    }).catch(err => err)
+
+  } else {
+
+    inquirer.prompt([
+      {
+        type: 'input',
+        name: 'LOGO_IMAGE',
+        message: 'Please provide the filename of the IMAGE you want (recommended size 1024 x 1024 or bigger | PNG format). E.g.: logo',
+        default: 'logo'
+      }
+    ]).then(answer => {
+      userAnswers.push(answer.LOGO_IMAGE + '.png')
+      userAnswers.push(answer.LOGO_IMAGE + '.png')
+      askForColor()
+    }).catch(err => err)
+  }
+})
+
+const askForColor = (() => {
+  inquirer.prompt([
+    {
+      type: 'list',
+      name: 'USER_COLOR',
+      message: 'Please select the color for the background of the splash screens and icons:',
+      choices: colors
+    }
+  ]).then(answer => {
+    if (answer.USER_COLOR === 'Custom') {
+      askForCustomColor()
     } else {
-      Jimp.read(foto.imgMode)
-      .then(img => {
-        img.resize(foto.tamanhoLogoX, foto.tamanhoLogoY)
-        .write(foto.pathSave)
-      })
+      const start = answer.USER_COLOR.indexOf('(')
+      const end = answer.USER_COLOR.indexOf(')')
+      const codeColor = answer.USER_COLOR.substring(start + 1, end)
+      userAnswers.push(codeColor)
+      startProcess()
     }
-  })
-}
+  }).catch(err => err)
+})
 
-
-(function welcome () {
-  return console.log(chalk.blue.bold(`
-    Welcome to SplashLogoGen!
-    Please, select the icons and splash screens for the devices you want:
-    `))
-})()
-// CLI Selections
-cliSelect({
-  values: [
+const askForCustomColor = (() => {
+  inquirer.prompt([
     {
-      message: '1. Generate icons and splash screens for all platforms.'
-    },
-    {
-      message: '2. Generate Android icons and splash screens.'
-    },
-    {
-      message: '3. Generate iOS icons and splash screens'
-    },
-    {
-      message: '4. Exit'
+      type: 'input',
+      name: 'CUSTOM_COLOR',
+      message: 'Please, provide the code of the color you want (E.g.: ff2233)',
+      default: '#ffffff'
     }
-  ],
-  valueRenderer: (value, selected) => {
-      if (selected) {
-          return chalk.green(value.message)
-      }
-      return value.message
-  },
-}).then(
-    (value) => {
-      value.id === 0 ?
-      generateAll(logosData, iconsData, iosSplashData, iosIcons)
-      : value.id === 1 ?
-      generateAndroid(logosData, iconsData)
-      : value.id === 2 ?
-      generateIOS(iosSplashData, iosIcons)
-      : console.log(chalk.green.bold('Program closed. No images were generated.'))
-    }).catch((e) => {
-      console.log(chalk.red('Program closed', e))
-  })
+  ]).then(answer => {
+    userAnswers.push(answer.CUSTOM_COLOR)
+    startProcess()
+  }).catch(err => err)
+})
 
+const startProcess = (() => {
+  iosLogo = userAnswers[3]
+  logoSource = userAnswers[2]
+  iconSource = userAnswers[3]
+  setColor = userAnswers[4]
+  if (userAnswers[0] === platforms[0]) {
+    generateAll(logosData, iconsData, iosSplashData, iosIcons)
+  } else if (userAnswers[0] === platforms[1]) {
+    generateAndroid(logosData, iconsData)
+  } else {
+    generateIOS(iosSplashData, iosIcons)
+  }
+})
 
 // CALL FOR GENERATE FUNCTIONS
 const generateAll =  async function() {
@@ -933,9 +969,12 @@ const generateAndroid = async function() {
 
 const generateIOS = async function() {
   try {
-    await startLogoCreation(iosSplashData)
+    // await startLogoCreation(iosSplashData)
     await startIosIconCreation(iosIcons)
   } catch (err) {
     return console.error(err)
   }
 }
+
+// Will start the process by asking for the user choices
+askForImages()
