@@ -1,0 +1,122 @@
+[
+  {
+    "iconName": "android/mipmap-hdpi/icon.png",
+    "backgroundName": null,
+    "sizeX": 72,
+    "sizeY": 72,
+    "color": "",
+    "xmlPath": null,
+    "saveIcon": "dist/android/mipmap-hdpi/icon.png",
+    "saveBackground": null
+  },
+  {
+    "iconName": "android/mipmap-hdpi-v26/ic_launcher_foreground.png",
+    "backgroundName": "android/mipmap-hdpi-v26/ic_launcher_background.png",
+    "sizeX": 72,
+    "sizeY": 72,
+    "color": "",
+    "xmlPath": "dist/android/mipmap-hdpi-v26/ic_launcher.xml",
+    "saveIcon": "dist/android/mipmap-hdpi-v26/ic_launcher_foreground.png",
+    "saveBackground": "dist/android/mipmap-hdpi-v26/ic_launcher_background.png"
+  },
+  {
+    "iconName": "android/mipmap-ldpi/icon.png",
+    "backgroundName": null,
+    "sizeX": 36,
+    "sizeY": 36,
+    "color": "",
+    "xmlPath": null,
+    "saveIcon": "dist/android/mipmap-ldpi/icon.png",
+    "saveBackground": null
+  },
+  {
+    "iconName": "android/mipmap-ldpi-v26/ic_launcher_foreground.png",
+    "backgroundName": "android/mipmap-ldpi-v26/ic_launcher_background.png",
+    "sizeX": 36,
+    "sizeY": 36,
+    "color": "",
+    "xmlPath": "dist/android/mipmap-ldpi-v26/ic_launcher.xml",
+    "saveIcon": "dist/android/mipmap-ldpi-v26/ic_launcher_foreground.png",
+    "saveBackground": "dist/android/mipmap-ldpi-v26/ic_launcher_background.png"
+  },
+  {
+    "iconName": "android/mipmap-mdpi/icon.png",
+    "backgroundName": null,
+    "sizeX": 48,
+    "sizeY": 48,
+    "color": "",
+    "xmlPath": null,
+    "saveIcon": "dist/android/mipmap-mdpi/icon.png",
+    "saveBackground": null
+  },
+  {
+    "iconName": "android/mipmap-mdpi-v26/ic_launcher_foreground.png",
+    "backgroundName": "android/mipmap-mdpi-v26/ic_launcher_background.png",
+    "sizeX": 48,
+    "sizeY": 48,
+    "color": "",
+    "xmlPath": "dist/android/mipmap-mdpi-v26/ic_launcher.xml",
+    "saveIcon": "dist/android/mipmap-mdpi-v26/ic_launcher_foreground.png",
+    "saveBackground": "dist/android/mipmap-mdpi-v26/ic_launcher_background.png"
+  },
+  {
+    "iconName": "android/mipmap-xhdpi/icon.png",
+    "backgroundName": null,
+    "sizeX": 144,
+    "sizeY": 144,
+    "color": "",
+    "xmlPath": null,
+    "saveIcon": "dist/android/mipmap-xhdpi/icon.png",
+    "saveBackground": null
+  },
+  {
+    "iconName": "android/mipmap-xhdpi-v26/ic_launcher_foreground.png",
+    "backgroundName": "android/mipmap-xhdpi-v26/ic_launcher_background.png",
+    "sizeX": 216,
+    "sizeY": 216,
+    "color": "",
+    "xmlPath": "dist/android/mipmap-xhdpi-v26/ic_launcher.xml",
+    "saveIcon": "dist/android/mipmap-xhdpi-v26/ic_launcher_foreground.png",
+    "saveBackground": "dist/android/mipmap-xhdpi-v26/ic_launcher_background.png"
+  },
+  {
+    "iconName": "android/mipmap-xxhdpi/icon.png",
+    "backgroundName": null,
+    "sizeX": 144,
+    "sizeY": 144,
+    "color": "",
+    "xmlPath": null,
+    "saveIcon": "dist/android/mipmap-xxhdpi/icon.png",
+    "saveBackground": null
+  },
+  {
+    "iconName": "android/mipmap-xxhdpi-v26/ic_launcher_foreground.png",
+    "backgroundName": "android/mipmap-xxhdpi-v26/ic_launcher_background.png",
+    "sizeX": 324,
+    "sizeY": 324,
+    "color": "",
+    "xmlPath": "dist/android/mipmap-xxhdpi-v26/ic_launcher.xml",
+    "saveIcon": "dist/android/mipmap-xxhdpi-v26/ic_launcher_foreground.png",
+    "saveBackground": "dist/android/mipmap-xxhdpi-v26/ic_launcher_background.png"
+  },
+  {
+    "iconName": "android/mipmap-xxxhdpi/icon.png",
+    "backgroundName": null,
+    "sizeX": 192,
+    "sizeY": 192,
+    "color": "",
+    "xmlPath": null,
+    "saveIcon": "dist/android/mipmap-xxxhdpi/icon.png",
+    "saveBackground": null
+  },
+  {
+    "iconName": "android/mipmap-xxxhdpi-v26/ic_launcher_foreground.png",
+    "backgroundName": "android/mipmap-xxxhdpi-v26/ic_launcher_background.png",
+    "sizeX": 432,
+    "sizeY": 432,
+    "color": "",
+    "xmlPath": "dist/android/mipmap-xxxhdpi-v26/ic_launcher.xml",
+    "saveIcon": "dist/android/mipmap-xxxhdpi-v26/ic_launcher_foreground.png",
+    "saveBackground": "dist/android/mipmap-xxxhdpi-v26/ic_launcher_background.png"
+  }
+]

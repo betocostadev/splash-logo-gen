@@ -1,0 +1,156 @@
+[
+  {
+    "name": "1024rb",
+    "backgroundSizeX": 1024,
+    "backgroundSizeY": 500,
+    "color": "",
+    "logoSizeX": 450,
+    "logoSizeY": 450,
+    "blitX": 0,
+    "blitY": 0,
+    "save": "dist/1024rb.png"
+  },
+  {
+    "name": "512rb",
+    "backgroundSizeX": 512,
+    "backgroundSizeY": 512,
+    "color": "",
+    "logoSizeX": 512,
+    "logoSizeY": 512,
+    "blitX": 0,
+    "blitY": 0,
+    "save": "dist/512rb.png"
+  },
+  {
+    "name": "android/drawable-land-hdpi/screen.png",
+    "backgroundSizeX": 800,
+    "backgroundSizeY": 480,
+    "color": "",
+    "logoSizeX": 480,
+    "logoSizeY": 480,
+    "blitX": 160,
+    "blitY": 0,
+    "save": "dist/android/drawable-land-hdpi/screen.png"
+  },
+  {
+    "name": "android/drawable-land-ldpi/screen.png",
+    "backgroundSizeX": 320,
+    "backgroundSizeY": 200,
+    "color": "",
+    "logoSizeX": 200,
+    "logoSizeY": 200,
+    "blitX": 60,
+    "blitY": 0,
+    "save": "dist/android/drawable-land-ldpi/screen.png"
+  },
+  {
+    "name": "android/drawable-land-mdpi/screen.png",
+    "backgroundSizeX": 480,
+    "backgroundSizeY": 320,
+    "color": "",
+    "logoSizeX": 320,
+    "logoSizeY": 320,
+    "blitX": 80,
+    "blitY": 0,
+    "save": "dist/android/drawable-land-mdpi/screen.png"
+  },
+  {
+    "name": "android/drawable-land-xhdpi/screen.png",
+    "backgroundSizeX": 1280,
+    "backgroundSizeY": 720,
+    "color": "",
+    "logoSizeX": 720,
+    "logoSizeY": 720,
+    "blitX": 280,
+    "blitY": 0,
+    "save": "dist/android/drawable-land-xhdpi/screen.png"
+  },
+  {
+    "name": "android/drawable-land-xxhdpi/screen.png",
+    "backgroundSizeX": 1600,
+    "backgroundSizeY": 960,
+    "color": "",
+    "logoSizeX": 960,
+    "logoSizeY": 960,
+    "blitX": 320,
+    "blitY": 0,
+    "save": "dist/android/drawable-land-xxhdpi/screen.png"
+  },
+  {
+    "name": "android/drawable-land-xxxhdpi/screen.png",
+    "backgroundSizeX": 1920,
+    "backgroundSizeY": 1280,
+    "color": "",
+    "logoSizeX": 960,
+    "logoSizeY": 960,
+    "blitX": 480,
+    "blitY": 160,
+    "save": "dist/android/drawable-land-xxxhdpi/screen.png"
+  },
+  {
+    "name": "android/drawable-port-hdpi/screen.png",
+    "backgroundSizeX": 480,
+    "backgroundSizeY": 800,
+    "color": "",
+    "logoSizeX": 480,
+    "logoSizeY": 480,
+    "blitX": 0,
+    "blitY": 160,
+    "save": "dist/android/drawable-port-hdpi/screen.png"
+  },
+  {
+    "name": "android/drawable-port-ldpi/screen.png",
+    "backgroundSizeX": 200,
+    "backgroundSizeY": 320,
+    "color": "",
+    "logoSizeX": 200,
+    "logoSizeY": 200,
+    "blitX": 0,
+    "blitY": 60,
+    "save": "dist/android/drawable-port-ldpi/screen.png"
+  },
+  {
+    "name": "android/drawable-port-mdpi/screen.png",
+    "backgroundSizeX": 320,
+    "backgroundSizeY": 480,
+    "color": "",
+    "logoSizeX": 320,
+    "logoSizeY": 320,
+    "blitX": 0,
+    "blitY": 80,
+    "save": "dist/android/drawable-port-mdpi/screen.png"
+  },
+  {
+    "name": "android/drawable-port-xhdpi/screen.png",
+    "backgroundSizeX": 720,
+    "backgroundSizeY": 1280,
+    "color": "",
+    "logoSizeX": 720,
+    "logoSizeY": 720,
+    "blitX": 0,
+    "blitY": 280,
+    "save": "dist/android/drawable-port-xhdpi/screen.png"
+  },
+  {
+    "name": "android/drawable-port-xxhdpi/screen.png",
+    "backgroundSizeX": 960,
+    "backgroundSizeY": 1600,
+    "color": "",
+    "logoSizeX": 960,
+    "logoSizeY": 960,
+    "blitX": 0,
+    "blitY": 320,
+    "save": "dist/android/drawable-port-xxhdpi/screen.png"
+  },
+  {
+    "name": "android/drawable-port-xxxhdpi/screen.png",
+    "backgroundSizeX": 1280,
+    "backgroundSizeY": 1920,
+    "color": "",
+    "logoSizeX": 960,
+    "logoSizeY": 960,
+    "blitX": 128,
+    "blitY": 448,
+    "save": "dist/android/drawable-port-xxxhdpi/screen.png"
+  }
+]
