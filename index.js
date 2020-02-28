@@ -5,7 +5,7 @@ const Jimp = require('jimp')
 const inquirer = require('inquirer')
 const toIco = require('to-ico')
 
-const platforms = [ '1. All', '2. Android', '3. iOS' ]
+const platforms = [ '1. All', '2. Android', '3. iOS', '4. Generate favicon only' ]
 const colors = [ 'White (#ffffff)', 'Black (#000000)', 'Transparent (#ffffff00)', 'Custom' ]
 const userAnswers = []
 
@@ -19,7 +19,12 @@ let iosLogo, logoSource, iconSource, setColor
 
 // Welcome message
 console.log(chalk.blue.bold(`
-    Welcome to SplashLogoGen!
+=================== Welcome to SplashLogoGen! ===================
+Generate images for Desktop, Android and iOS Splash Screens, icons and favicons.
+All images must be in PNG format. Please, use these dimensions for better results:
+ - 1024x1024 or higher for the 'logo' (splash screens) image
+ - 500x500 or higher for the 'icon' (Android and iOS app) image
+ - 192x192 or higher for the 'favicon' image
     `))
 
 
@@ -36,11 +41,6 @@ function createBackground(sizeX, sizeY, color) {
 
 const createIco = async function() {
   try {
-    // const manifest = await JSON.parse(fs.readFileSync('./data-sources/manifest.json'))
-    // // var manifest2 = JSON.parse(manifest)
-    // console.log('The manifest')
-    // console.log(manifest)
-
     setTimeout(() => {
       fs.copyFile('data-sources/manifest.json', 'dist/favicon/manifest.json', (err) => {
         if (err) throw err
@@ -209,8 +209,33 @@ const askForImages = (() => {
       },
   ]).then(answers => {
     userAnswers.push(answers.PLATFORM)
-    askIfSameFile()
+    if (userAnswers[0] === platforms[3] || userAnswers[0] === platforms[0]) {
+      askFaviconFile()
+    } else {
+      askIfSameFile()
+    }
   }).catch(err => err)
+})
+
+const askFaviconFile = (() => {
+    inquirer.prompt([
+      {
+        type: 'input',
+        name: 'FAVICON_IMAGE',
+        message: 'Please provide the "filename" of the image(PNG) you will use for the "favicon". E.g.: favicon',
+        default: 'favicon'
+      },
+    ]).then(answer => {
+      if (userAnswers[0] === platforms[3]) {
+        userAnswers.push(answer.FAVICON_IMAGE + '.png')
+        startProcess()
+      } else {
+        userAnswers.push(answer.FAVICON_IMAGE + '.png')
+        askIfSameFile()
+      }
+
+
+    }).catch(err => console.log(err))
 })
 
 const askIfSameFile = (() => {
@@ -228,18 +253,18 @@ const askIfSameFile = (() => {
 })
 
 const askForFileName = (() => {
-  if(userAnswers[1] === false) {
+  if(userAnswers[1] === false || userAnswers[2] === false) {
     inquirer.prompt([
       {
         type: 'input',
         name: 'LOGO_IMAGE',
-        message: 'Please provide the "filename" of the logo for the Splash Screen (recommended size 1024 x 1024 or bigger | PNG format). E.g.: logo',
+        message: 'Please provide the filename of the "source" image for Splash Screens. E.g.: logo',
         default: 'logo'
       },
       {
         type: 'input',
         name: 'ICON_IMAGE',
-        message: 'Please provide the "filename" of the icon for the icons (recommended size 256 x 256 or bigger | PNG format). E.g.: icon',
+        message: 'Please provide the filename of "source" image for "App icons". E.g.: icon',
         default: 'icon'
       }
     ]).then(answer => {
@@ -253,7 +278,7 @@ const askForFileName = (() => {
       {
         type: 'input',
         name: 'LOGO_IMAGE',
-        message: 'Please provide the filename of the IMAGE you want (recommended size 1024 x 1024 or bigger | PNG format). E.g.: logo',
+        message: 'Please provide the filename of the "source" image for Splash Screens. E.g.: logo',
         default: 'logo'
       }
     ]).then(answer => {
@@ -265,6 +290,7 @@ const askForFileName = (() => {
 })
 
 const askForColor = (() => {
+  console.log(userAnswers)
   inquirer.prompt([
     {
       type: 'list',
@@ -300,15 +326,19 @@ const askForCustomColor = (() => {
 })
 
 const startProcess = (() => {
-  iosLogo = userAnswers[3]
-  logoSource = userAnswers[2]
-  iconSource = userAnswers[3]
-  setColor = userAnswers[4]
-  faviconSource = 'favicon.png'
+  console.log(userAnswers)
+
   if (userAnswers[0] === platforms[0]) {
+    faviconSource = userAnswers[1]
+    iosLogo = userAnswers[2]
+    logoSource = userAnswers[2]
+    iconSource = userAnswers[3]
+    setColor = userAnswers[4]
     generateAll(logosData, iconsData, iosSplashData, iosIcons, faviconSource)
   } else if (userAnswers[0] === platforms[1]) {
     generateAndroid(logosData, iconsData)
+  } else if (userAnswers[0] === platforms[3]) {
+    generateFaviconOnly(faviconsData)
   } else {
     generateIOS(iosSplashData, iosIcons)
   }
@@ -322,7 +352,7 @@ const generateAll =  async function() {
     // await startLogoCreation(iosSplashData)
     // await startIosIconCreation(iosIcons)
     // await createIco(faviconSource, icoData)
-    startFaviconCreation(faviconsData)
+    await startFaviconCreation(faviconsData)
   } catch (err) {
     return console.error(err)
   }
@@ -341,6 +371,14 @@ const generateIOS = async function() {
   try {
     await startLogoCreation(iosSplashData)
     await startIosIconCreation(iosIcons)
+  } catch (err) {
+    return console.error(err)
+  }
+}
+
+const generateFaviconOnly = async function() {
+  try {
+    await startFaviconCreation(faviconsData)
   } catch (err) {
     return console.error(err)
   }
