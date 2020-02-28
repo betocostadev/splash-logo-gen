@@ -1,7 +1,9 @@
 const fs = require('fs')
 const chalk = require('chalk')
 const Jimp = require('jimp')
+// const pngToIco = require('png-to-ico')
 const inquirer = require('inquirer')
+const toIco = require('to-ico')
 
 const platforms = [ '1. All', '2. Android', '3. iOS' ]
 const colors = [ 'White (#ffffff)', 'Black (#000000)', 'Transparent (#ffffff00)', 'Custom' ]
@@ -31,12 +33,44 @@ function createBackground(sizeX, sizeY, color) {
   })
 }
 
+
+const createIco = async function() {
+  try {
+    // const manifest = await JSON.parse(fs.readFileSync('./data-sources/manifest.json'))
+    // // var manifest2 = JSON.parse(manifest)
+    // console.log('The manifest')
+    // console.log(manifest)
+
+    setTimeout(() => {
+      fs.copyFile('data-sources/manifest.json', 'dist/favicon/manifest.json', (err) => {
+        if (err) throw err
+        console.log('manifest.json copied to favicon directory.')
+      })
+
+      fs.copyFile('data-sources/browserconfig.xml', 'dist/favicon/browserconfig.xml', (err) => {
+        if (err) throw err
+        console.log('browserconfig.xml copied to favicon directory.')
+      })
+
+      const file = fs.readFileSync('dist/favicon/favicon-16x16.png')
+      if (file) {
+        toIco(file).then(buf => fs.writeFileSync('dist/favicon/favicon.ico', buf))
+      }
+      console.log('favicon.ico created.')
+    }, 2500)
+
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 const startFaviconCreation = async function(dataSource) {
   try {
     console.log(chalk.green.bold('Favicons for all platforms will be generated...'))
-    dataSource.map(icon => {
+    await dataSource.map(icon => {
       createFavicons(icon)
     })
+    await createIco()
   } catch (error) {
     console.error(error)
   }
@@ -79,11 +113,11 @@ const startIosIconCreation = async function(dataSource) {
 }
 
 // Create functions
-async function createFavicons({ sizeX, sizeY, save }) {
+async function createFavicons({ size, save }) {
   // SERÁ GERADO O FAVICON SOURCE DE ACORDO COM AS RESPOSTAS DO USUÁRIO COMO NAS OUTRAS FUNÇÕES!
   const icon = await Jimp.read(faviconSource)
   try {
-    icon.resize(sizeX, sizeY).write(save)
+    icon.resize(size, size).write(save)
     console.log(save)
   } catch (error) {
     console.log(error)
@@ -170,7 +204,7 @@ const askForImages = (() => {
       {
         type: 'list',
         name: 'PLATFORM',
-        message: 'For which platforms do you want to generate the Icons and Splash Screens ?',
+        message: 'For which "platforms" do you want to generate the Icons and Splash Screens ?',
         choices: platforms
       },
   ]).then(answers => {
@@ -184,7 +218,7 @@ const askIfSameFile = (() => {
     {
       type: 'confirm',
       name: 'SAME_FILE',
-      message: 'Will you use the SAME FILE for the Icons and Splash Screens ?',
+      message: 'Will you use the "SAME FILE" for the Icons and Splash Screens ?',
       default: true
     }
   ]).then(answer => {
@@ -199,13 +233,13 @@ const askForFileName = (() => {
       {
         type: 'input',
         name: 'LOGO_IMAGE',
-        message: 'Please provide the filename of the logo for the Splash Screen (recommended size 1024 x 1024 or bigger | PNG format). E.g.: logo',
+        message: 'Please provide the "filename" of the logo for the Splash Screen (recommended size 1024 x 1024 or bigger | PNG format). E.g.: logo',
         default: 'logo'
       },
       {
         type: 'input',
         name: 'ICON_IMAGE',
-        message: 'Please provide the filename of the icon for the icons (recommended size 256 x 256 or bigger | PNG format). E.g.: icon',
+        message: 'Please provide the "filename" of the icon for the icons (recommended size 256 x 256 or bigger | PNG format). E.g.: icon',
         default: 'icon'
       }
     ]).then(answer => {
@@ -287,7 +321,8 @@ const generateAll =  async function() {
     // await startIconCreation(iconsData)
     // await startLogoCreation(iosSplashData)
     // await startIosIconCreation(iosIcons)
-    await startFaviconCreation(faviconsData)
+    // await createIco(faviconSource, icoData)
+    startFaviconCreation(faviconsData)
   } catch (err) {
     return console.error(err)
   }
