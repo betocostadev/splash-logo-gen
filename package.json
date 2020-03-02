@@ -15,8 +15,5 @@
     "jimp": "^0.6.4",
     "mkdirp": "^0.5.1",
     "to-ico": "^1.1.5"
-  },
-  "devDependencies": {
-    "png-to-ico": "^2.0.6"
   }
 }

@@ -1,7 +1,6 @@
 const fs = require('fs')
 const chalk = require('chalk')
 const Jimp = require('jimp')
-// const pngToIco = require('png-to-ico')
 const inquirer = require('inquirer')
 const toIco = require('to-ico')
 
