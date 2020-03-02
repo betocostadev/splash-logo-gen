@@ -54,7 +54,9 @@ const createIco = async function() {
 
       const file = fs.readFileSync('dist/favicon/favicon-16x16.png')
       if (file) {
-        toIco(file).then(buf => fs.writeFileSync('dist/favicon/favicon.ico', buf))
+        toIco(file)
+          .then(buf => fs.writeFileSync('dist/favicon/favicon.ico', buf))
+          .catch(err => console.log(err))
       }
       console.log('favicon.ico created.')
     }, 2500)
@@ -234,7 +236,6 @@ const askFaviconFile = (() => {
         askIfSameFile()
       }
 
-
     }).catch(err => console.log(err))
 })
 
@@ -290,7 +291,6 @@ const askForFileName = (() => {
 })
 
 const askForColor = (() => {
-  console.log(userAnswers)
   inquirer.prompt([
     {
       type: 'list',
@@ -326,20 +326,25 @@ const askForCustomColor = (() => {
 })
 
 const startProcess = (() => {
-  console.log(userAnswers)
-
   if (userAnswers[0] === platforms[0]) {
     faviconSource = userAnswers[1]
-    iosLogo = userAnswers[2]
+    iosLogo = userAnswers[3]
+    logoSource = userAnswers[3]
+    iconSource = userAnswers[4]
+    setColor = userAnswers[5]
+    generateAll(logosData, iconsData, iosSplashData, iosIcons, faviconSource)
+  } else if (userAnswers[0] === platforms[1]) {
     logoSource = userAnswers[2]
     iconSource = userAnswers[3]
     setColor = userAnswers[4]
-    generateAll(logosData, iconsData, iosSplashData, iosIcons, faviconSource)
-  } else if (userAnswers[0] === platforms[1]) {
     generateAndroid(logosData, iconsData)
   } else if (userAnswers[0] === platforms[3]) {
+    faviconSource = userAnswers[1]
     generateFaviconOnly(faviconsData)
   } else {
+    logoSource = userAnswers[2]
+    iconSource = userAnswers[3]
+    setColor = userAnswers[4]
     generateIOS(iosSplashData, iosIcons)
   }
 })
@@ -347,12 +352,13 @@ const startProcess = (() => {
 // CALL FOR GENERATE FUNCTIONS
 const generateAll =  async function() {
   try {
-    // await startLogoCreation(logosData)
-    // await startIconCreation(iconsData)
-    // await startLogoCreation(iosSplashData)
-    // await startIosIconCreation(iosIcons)
-    // await createIco(faviconSource, icoData)
     await startFaviconCreation(faviconsData)
+    setTimeout(() => {
+      startLogoCreation(logosData)
+      startIconCreation(iconsData)
+      startLogoCreation(iosSplashData)
+      startIosIconCreation(iosIcons)
+    }, 500);
   } catch (err) {
     return console.error(err)
   }
