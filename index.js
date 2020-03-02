@@ -5,7 +5,7 @@ const Jimp = require('jimp')
 const inquirer = require('inquirer')
 const toIco = require('to-ico')
 
-const platforms = [ '1. All', '2. Android', '3. iOS', '4. Generate favicon only' ]
+const platforms = [ '1. All', '2. Android', '3. iOS', '4. Generate favicon only', '5. Exit' ]
 const colors = [ 'White (#ffffff)', 'Black (#000000)', 'Transparent (#ffffff00)', 'Custom' ]
 const userAnswers = []
 
@@ -213,6 +213,8 @@ const askForImages = (() => {
     userAnswers.push(answers.PLATFORM)
     if (userAnswers[0] === platforms[3] || userAnswers[0] === platforms[0]) {
       askFaviconFile()
+    } else if (platforms[4]) {
+      exitProgram()
     } else {
       askIfSameFile()
     }
@@ -347,6 +349,10 @@ const startProcess = (() => {
     setColor = userAnswers[4]
     generateIOS(iosSplashData, iosIcons)
   }
+})
+
+const exitProgram = (() => {
+  return console.log(chalk.blue('Program closed, no images were generated.'))
 })
 
 // CALL FOR GENERATE FUNCTIONS
